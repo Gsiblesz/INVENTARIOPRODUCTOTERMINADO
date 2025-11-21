@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menú de Formularios</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <h1>FORMULARIO DE INVENTARIO DE PRODUCTO TERMINADO DE LA TATA DE LA LIBERTAD</h1>
+    </header>
+
+    <main>
+        <aside class="menu">
+            <button class="menu__btn active" data-target="inventario">INVENTARIO DE PRODUCTO TERMINADO</button>
+            <button class="menu__btn" data-target="productos">CATÁLOGO DE PRODUCTOS</button>
+        </aside>
+
+        <section class="forms">
+            <article id="inventario" class="form-card active">
+                <h3>INVENTARIO DE PRODUCTO TERMINADO</h3>
+                <form data-action="inventario">
+                    <label class="compact-field">Fecha
+                        <input type="date" name="fecha" required />
+                    </label>
+                    <label class="compact-field">Hora
+                        <input type="time" name="hora" required />
+                    </label>
+                    <label>Tipo
+                        <select name="tipo" id="tipoInventario" required>
+                            <option value="INVENTARIO DE CIERRE">INVENTARIO DE CIERRE</option>
+                            <option value="DEVOLUCIONES">DEVOLUCIONES</option>
+                        </select>
+                    </label>
+                    <label>Empresa
+                        <select name="empresa" required>
+                            <option value="PANIFICADORA COSTA DORADA, C.A">PANIFICADORA COSTA DORADA, C.A</option>
+                            <option value="LA TATA DE LA LIBERTAD, C.A">LA TATA DE LA LIBERTAD, C.A</option>
+                        </select>
+                    </label>
+                    <label>Sede
+                        <select name="sede" id="sedeInventario" required>
+                            <option value="SAN LUIS">SAN LUIS</option>
+                            <option value="LOS PALOS GRANDES">LOS PALOS GRANDES</option>
+                            <option value="SAMBIL LA CANDELARIA">SAMBIL LA CANDELARIA</option>
+                            <option value="SAMBIL CHACAO">SAMBIL CHACAO</option>
+                            <option value="BELLO CAMPO">BELLO CAMPO</option>
+                        </select>
+                    </label>
+                    <label>Responsable
+                        <input type="text" name="responsable" placeholder="Nombre y apellido" required />
+                    </label>
+
+                    <section class="product-lines">
+                        <div class="product-lines__header">
+                            <div>
+                                <h4>Productos involucrados</h4>
+                                <p class="product-lines__hint">Seleccione productos del catálogo y registre la cantidad correspondiente.</p>
+                            </div>
+                            <button type="button" class="add-product-line">Agregar producto</button>
+                        </div>
+                        <div class="product-lines__list" id="product-lines-container"></div>
+                    </section>
+
+                    <input type="hidden" name="productos" id="productosPayload" />
+                    <button type="submit">Actualizar inventario</button>
+                    <p class="form-status" data-status="inventario"></p>
+                </form>
+            </article>
+
+            <article id="productos" class="form-card">
+                <h3>CATÁLOGO DE PRODUCTOS</h3>
+                <p>Desde aquí puedes sincronizar la lista con Google Sheets para usar los productos existentes como sugerencia en el inventario.</p>
+
+                <section class="product-panel">
+                    <div class="product-panel__header">
+                        <div>
+                            <h4>Listado sincronizado</h4>
+                            <p class="product-panel__hint">Fuente: pestaña "PRODUCTOS" del Google Sheets proporcionado (columnas CODIGOS, DESCRIPCION, Unidad_Primaria).</p>
+                        </div>
+                        <button type="button" class="refresh-products" aria-label="Actualizar catálogo">Actualizar lista</button>
+                    </div>
+                    <p class="form-status" data-status="productList"></p>
+
+                    <div class="product-search">
+                        <span aria-hidden="true">🔍</span>
+                        <input type="search" id="product-search" placeholder="Buscar por código o descripción" />
+                    </div>
+
+                    <div class="product-panel__notice">
+                        <strong>Nota:</strong> para agregar o eliminar productos actualice directamente la pestaña <em>PRODUCTOS</em> del Google Sheets. Los cambios se reflejarán aquí cuando presione "Actualizar lista".
+                    </div>
+
+                    <div class="product-table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Unidad primaria</th>
+                                </tr>
+                            </thead>
+                            <tbody id="product-table-body">
+                                <tr>
+                                    <td colspan="3">Sin datos todavía</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </article>
+        </section>
+    </main>
+
+    <datalist id="productos-datalist"></datalist>
+    <script src="script.js"></script>
+</body>
+</html>
