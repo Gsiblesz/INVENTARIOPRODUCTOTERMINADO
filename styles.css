@@ -311,6 +311,10 @@ button[type="submit"]:hover {
     font-weight: 600;
 }
 
+.product-lines .add-product-line {
+    align-self: flex-start;
+}
+
 .add-product-line:hover,
 .product-line button.remove-line:hover {
     opacity: 0.85;

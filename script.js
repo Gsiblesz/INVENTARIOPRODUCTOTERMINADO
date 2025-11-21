@@ -252,6 +252,18 @@ function getFilteredProducts() {
     });
 }
 
+function findProductMatchByValue(value) {
+    const normalized = (value || '').trim().toLowerCase();
+    if (!normalized) return null;
+    return (
+        state.products.find((item) => {
+            const descripcion = (item.descripcion || '').trim().toLowerCase();
+            const codigo = (item.codigo || '').trim().toLowerCase();
+            return descripcion === normalized || codigo === normalized;
+        }) || null
+    );
+}
+
 function syncSedeWithTipo() {
     if (!tipoInventario || !sedeInventario) return;
     const isDevoluciones = tipoInventario.value === 'DEVOLUCIONES';
@@ -311,18 +323,19 @@ function syncProductLineValues(line) {
     if (!value) {
         unidadInput.value = '';
         codigoInput.value = '';
+        descripcionInput.setCustomValidity('');
         return;
     }
-    const match = state.products.find(
-        (item) => item.descripcion === value || item.codigo === value
-    );
+    const match = findProductMatchByValue(value);
     if (match) {
         descripcionInput.value = match.descripcion;
         unidadInput.value = match.unidad || '';
         codigoInput.value = match.codigo || '';
+        descripcionInput.setCustomValidity('');
     } else {
         unidadInput.value = '';
         codigoInput.value = '';
+        descripcionInput.setCustomValidity('Seleccione un producto del catálogo.');
     }
 }
 
@@ -347,16 +360,21 @@ function collectProductLines() {
             throw new Error('Las cantidades deben ser números enteros.');
         }
 
-        const key = (codigoInput.value || descripcion).toLowerCase();
+        const productMatch = findProductMatchByValue(descripcion);
+        if (!productMatch) {
+            throw new Error(`'${descripcion}' no forma parte del catálogo. Seleccione productos existentes.`);
+        }
+
+        const key = (productMatch.codigo || productMatch.descripcion).toLowerCase();
         if (seenKeys.has(key)) {
             throw new Error('No se puede registrar el mismo producto más de una vez.');
         }
         seenKeys.add(key);
 
         lines.push({
-            codigo: codigoInput.value || '',
-            descripcion,
-            unidad: unidadInput.value || '',
+            codigo: productMatch.codigo || '',
+            descripcion: productMatch.descripcion,
+            unidad: productMatch.unidad || '',
             cantidad,
         });
     });
