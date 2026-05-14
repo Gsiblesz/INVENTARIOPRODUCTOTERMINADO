@@ -3,64 +3,71 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Menú de Formularios</title>
+    <title>Inventario Producto Terminado</title>
     <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
     <header>
         <div class="header-bar">
-            <a class="back-link" href="https://menu-general.vercel.app/">← Volver al menú</a>
+            <a class="back-link" href="https://menu-general.vercel.app/">Volver al menu</a>
         </div>
-        <h1>FORMULARIO DE INVENTARIO DE PRODUCTO TERMINADO DE LA TATA DE LA LIBERTAD</h1>
+        <p class="header-kicker">La Tata de la Libertad</p>
+        <h1>Inventario de producto terminado</h1>
     </header>
 
     <main>
         <aside class="menu">
-            <button class="menu__btn active" data-target="inventario">INVENTARIO DE PRODUCTO TERMINADO</button>
-            <button class="menu__btn" data-target="productos">CATÁLOGO DE PRODUCTOS</button>
+            <button class="menu__btn active" data-target="inventario">Inventario</button>
+            <button class="menu__btn" data-target="productos">Catalogo de productos</button>
         </aside>
 
         <section class="forms">
             <article id="inventario" class="form-card active">
-                <h3>INVENTARIO DE PRODUCTO TERMINADO</h3>
+                <div class="card-heading">
+                    <span class="card-eyebrow">Registro diario</span>
+                    <h3>Inventario de producto terminado</h3>
+                </div>
+
                 <form data-action="inventario">
-                    <label class="compact-field">Fecha
-                        <input type="date" name="fecha" required />
-                    </label>
-                    <label class="compact-field">Hora
-                        <input type="time" name="hora" required />
-                    </label>
-                    <label>Tipo
-                        <select name="tipo" id="tipoInventario" required>
-                            <option value="INVENTARIO DE CIERRE">INVENTARIO DE CIERRE</option>
-                            <option value="DEVOLUCIONES">DEVOLUCIONES</option>
-                        </select>
-                    </label>
-                    <label>Empresa
-                        <select name="empresa" required>
-                            <option value="PANIFICADORA COSTA DORADA, C.A">PANIFICADORA COSTA DORADA, C.A</option>
-                            <option value="LA TATA DE LA LIBERTAD, C.A">LA TATA DE LA LIBERTAD, C.A</option>
-                        </select>
-                    </label>
-                    <label>Sede
-                        <select name="sede" id="sedeInventario" required>
-                            <option value="SAN LUIS">SAN LUIS</option>
-                            <option value="LOS PALOS GRANDES">LOS PALOS GRANDES</option>
-                            <option value="SAMBIL LA CANDELARIA">SAMBIL LA CANDELARIA</option>
-                            <option value="SAMBIL CHACAO">SAMBIL CHACAO</option>
-                            <option value="BELLO CAMPO">BELLO CAMPO</option>
-                            <option value="LA GUAIRA">LA GUAIRA</option>
-                        </select>
-                    </label>
-                    <label>Responsable
-                        <input type="text" name="responsable" placeholder="Nombre y apellido" required />
-                    </label>
+                    <div class="inventory-grid">
+                        <label class="compact-field">Fecha
+                            <input type="date" name="fecha" required />
+                        </label>
+                        <label class="compact-field">Hora
+                            <input type="time" name="hora" required />
+                        </label>
+                        <label>Tipo
+                            <select name="tipo" id="tipoInventario" required>
+                                <option value="INVENTARIO DE CIERRE">INVENTARIO DE CIERRE</option>
+                                <option value="DEVOLUCIONES">DEVOLUCIONES</option>
+                            </select>
+                        </label>
+                        <label>Empresa
+                            <select name="empresa" required>
+                                <option value="PANIFICADORA COSTA DORADA, C.A">PANIFICADORA COSTA DORADA, C.A</option>
+                                <option value="LA TATA DE LA LIBERTAD, C.A">LA TATA DE LA LIBERTAD, C.A</option>
+                            </select>
+                        </label>
+                        <label>Sede
+                            <select name="sede" id="sedeInventario" required>
+                                <option value="SAN LUIS">SAN LUIS</option>
+                                <option value="LOS PALOS GRANDES">LOS PALOS GRANDES</option>
+                                <option value="SAMBIL LA CANDELARIA">SAMBIL LA CANDELARIA</option>
+                                <option value="SAMBIL CHACAO">SAMBIL CHACAO</option>
+                                <option value="BELLO CAMPO">BELLO CAMPO</option>
+                                <option value="LA GUAIRA">LA GUAIRA</option>
+                            </select>
+                        </label>
+                        <label>Responsable
+                            <input type="text" name="responsable" placeholder="Nombre y apellido" required />
+                        </label>
+                    </div>
 
                     <section class="product-lines">
                         <div class="product-lines__header">
                             <div>
                                 <h4>Productos involucrados</h4>
-                                <p class="product-lines__hint">Seleccione productos del catálogo y registre la cantidad correspondiente.</p>
+                                <p class="product-lines__hint">Seleccione productos del catalogo y registre la cantidad correspondiente.</p>
                             </div>
                         </div>
                         <div class="product-lines__list" id="product-lines-container"></div>
@@ -68,46 +75,51 @@
                     </section>
 
                     <input type="hidden" name="productos" id="productosPayload" />
-                    <button type="submit">Actualizar inventario</button>
+                    <div class="form-actions">
+                        <button type="submit">Actualizar inventario</button>
+                    </div>
                     <p class="form-status" data-status="inventario"></p>
                 </form>
             </article>
 
             <article id="productos" class="form-card">
-                <h3>CATÁLOGO DE PRODUCTOS</h3>
-                <p>Desde aquí puedes sincronizar la lista con Google Sheets para usar los productos existentes como sugerencia en el inventario.</p>
+                <div class="card-heading">
+                    <span class="card-eyebrow">Consulta rapida</span>
+                    <h3>Catalogo de productos</h3>
+                </div>
+                <p class="card-intro">Desde aqui puedes sincronizar la lista con Google Sheets para usar los productos existentes como sugerencia en el inventario.</p>
 
                 <section class="product-panel">
                     <div class="product-panel__header">
                         <div>
                             <h4>Listado sincronizado</h4>
-                            <p class="product-panel__hint">Fuente: pestaña "PRODUCTOS" del Google Sheets proporcionado (columnas CODIGOS, DESCRIPCION, Unidad_Primaria).</p>
+                            <p class="product-panel__hint">Fuente: pestana "PRODUCTOS" del Google Sheets proporcionado (columnas CODIGOS, DESCRIPCION, Unidad_Primaria).</p>
                         </div>
-                        <button type="button" class="refresh-products" aria-label="Actualizar catálogo">Actualizar lista</button>
+                        <button type="button" class="refresh-products" aria-label="Actualizar catalogo">Actualizar lista</button>
                     </div>
                     <p class="form-status" data-status="productList"></p>
 
                     <div class="product-search">
-                        <span aria-hidden="true">🔍</span>
-                        <input type="search" id="product-search" placeholder="Buscar por código o descripción" />
+                        <span aria-hidden="true">Buscar</span>
+                        <input type="search" id="product-search" placeholder="Buscar por codigo o descripcion" />
                     </div>
 
                     <div class="product-panel__notice">
-                        <strong>Nota:</strong> para agregar o eliminar productos actualice directamente la pestaña <em>PRODUCTOS</em> del Google Sheets. Los cambios se reflejarán aquí cuando presione "Actualizar lista".
+                        <strong>Nota:</strong> para agregar o eliminar productos actualice directamente la pestana <em>PRODUCTOS</em> del Google Sheets. Los cambios se reflejaran aqui cuando presione "Actualizar lista".
                     </div>
 
                     <div class="product-table-wrapper">
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Código</th>
-                                    <th>Descripción</th>
+                                    <th>Codigo</th>
+                                    <th>Descripcion</th>
                                     <th>Unidad primaria</th>
                                 </tr>
                             </thead>
                             <tbody id="product-table-body">
                                 <tr>
-                                    <td colspan="3">Sin datos todavía</td>
+                                    <td colspan="3">Sin datos todavia</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -121,8 +133,8 @@
         <div class="confirm-modal__backdrop" data-close-confirm></div>
         <div class="confirm-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title">
             <div class="confirm-modal__header">
-                <h3 id="confirm-modal-title">Confirmar entrega a sede</h3>
-                <button type="button" class="confirm-modal__close" data-close-confirm aria-label="Cerrar">×</button>
+                <h3 id="confirm-modal-title">Confirmar inventario</h3>
+                <button type="button" class="confirm-modal__close" data-close-confirm aria-label="Cerrar">x</button>
             </div>
             <p class="confirm-modal__hint">Verifica los datos antes de enviar.</p>
 
@@ -132,7 +144,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>Código</th>
+                            <th>Codigo</th>
                             <th>Producto</th>
                             <th>Unidad</th>
                             <th>Cantidad entregada</th>
@@ -157,7 +169,7 @@
     <datalist id="productos-datalist"></datalist>
     <script src="script.js"></script>
     <footer class="site-footer">
-        Elaborado por el pasante de producción Gerardo Siblesz
+        Elaborado por el pasante de produccion Gerardo Siblesz
     </footer>
 </body>
 </html>
